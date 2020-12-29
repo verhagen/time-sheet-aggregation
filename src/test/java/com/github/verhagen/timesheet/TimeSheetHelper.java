@@ -2,8 +2,8 @@ package com.github.verhagen.timesheet;
 
 public class TimeSheetHelper {
 
-	public static TimeSheetLogbook createTimeSheetSimple() {
-		TimeSheetLogbook.Builder bldr = new TimeSheetLogbook.Builder();
+	public static TimeSheet createTimeSheetSimple() {
+		TimeSheet.Builder bldr = new TimeSheet.Builder();
 
 //		2020; 01; Fri; 2020.01.03; 8; test[programming]
 //		2020; 01; Thu; 2020.01.02; 4; test[programming]
@@ -15,12 +15,12 @@ public class TimeSheetHelper {
 		bldr.add("2020.01.02", 4f, "sample[testing]");
 		bldr.add("2020.01.02", 2f, "sample[travel]");
 		bldr.add("2020.01.01", 0f, "(New Year's Day)");
-		TimeSheetLogbook timeSheet =  bldr.create();
+		TimeSheet timeSheet =  bldr.create();
 		return timeSheet;
 	}
 
-	public static TimeSheetLogbook createTimeSheetTwoWeeks() {
-		TimeSheetLogbook.Builder bldr = new TimeSheetLogbook.Builder();
+	public static TimeSheet createTimeSheetTwoWeeks() {
+		TimeSheet.Builder bldr = new TimeSheet.Builder();
 
 //		2020; 02; Fri; 2020.01.10; 8; sample[programming]
 //		                         ; 1; sample[travel-from]
@@ -58,7 +58,7 @@ public class TimeSheetHelper {
 		bldr.add("2020.01.02", 4f, "sample[testing]");
 		bldr.add("2020.01.02", 2f, "sample[travel]");
 		bldr.add("2020.01.01", 0f, "(New Year's Day)");
-		TimeSheetLogbook timeSheet =  bldr.create();
+		TimeSheet timeSheet =  bldr.create();
 		return timeSheet;
 	}
 

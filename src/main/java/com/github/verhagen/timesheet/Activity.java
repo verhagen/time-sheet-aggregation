@@ -2,16 +2,16 @@ package com.github.verhagen.timesheet;
 
 import java.time.LocalDate;
 
-public class TimeSheetEntry {
+public class Activity {
 	private final LocalDate date;
 	private final float hours;
-	private final String activity;
+	private final String name;
 
 
-	public TimeSheetEntry(Builder bldr) {
+	public Activity(Builder bldr) {
 		this.date = bldr.getDate();
 		this.hours = bldr.getHours();
-		this.activity = bldr.getActivity();
+		this.name = bldr.getName();
 	}
 
 
@@ -23,12 +23,12 @@ public class TimeSheetEntry {
 		return hours;
 	}
 
-	public String getActivity() {
-		return activity;
+	public String getName() {
+		return name;
 	}
 
 
-	public void accept(TimeSheetEntryVisitor visitor) {
+	public void accept(Visitor<Activity> visitor) {
 		visitor.visit(this);
 	}
 
@@ -38,11 +38,11 @@ public class TimeSheetEntry {
 	public static class Builder {
 		private LocalDate date;
 		private float hours;
-		private String activity;
+		private String name;
 
 
-		public TimeSheetEntry create() {
-			return new TimeSheetEntry(this);
+		public Activity create() {
+			return new Activity(this);
 		}
 
 
@@ -56,8 +56,8 @@ public class TimeSheetEntry {
 			return this;
 		}
 
-		public Builder add(String activity) {
-			this.activity = activity;
+		public Builder add(String name) {
+			this.name = name;
 			return this;
 		}
 
@@ -70,8 +70,8 @@ public class TimeSheetEntry {
 			return hours;
 		}
 
-		public String getActivity() {
-			return activity;
+		public String getName() {
+			return name;
 		}
 
 	}

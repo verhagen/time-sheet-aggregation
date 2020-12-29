@@ -32,13 +32,13 @@ public class Aggregator implements TimeSheetVisitor {
 
 
 	@Override
-	public void visit(LocalDate date, List<TimeSheetEntry> entries) {
+	public void visit(LocalDate date, List<Activity> entries) {
 		if (! totalsPerMainActivityPerDay.containsKey(date)) {
 			totalsPerMainActivityPerDay.put(date, new HashMap<>());
 		}
 		Map<String, Float> mainActivities = totalsPerMainActivityPerDay.get(date);
-		for (TimeSheetEntry entry : entries) {
-			String groupByActivity = groupBy(entry.getActivity());
+		for (Activity entry : entries) {
+			String groupByActivity = groupBy(entry.getName());
 			float groupByTotalHours = entry.getHours();
 			if (mainActivities.containsKey(groupByActivity)) {
 				groupByTotalHours += mainActivities.get(groupByActivity);
@@ -61,10 +61,7 @@ public class Aggregator implements TimeSheetVisitor {
 
 	public void accept(AggregateVisitor visitor) {
 		for (Map.Entry<LocalDate, Map<String, Float>> entry : totalsPerMainActivityPerDay.entrySet()) {
-			// TODO
-			// Get the totals per day, for each grouped-by activity
 			visitor.visit(entry.getKey(), entry.getValue());
-//			logger.info(entry.getKey() + ": " + entry.getValue());
 		}
 	}
 	

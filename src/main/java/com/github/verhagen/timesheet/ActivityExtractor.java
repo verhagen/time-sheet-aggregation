@@ -14,7 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ActivityExtractor implements TimeSheetEntryVisitor {
+public class ActivityExtractor implements Visitor<Activity> {
 	private Logger logger = LoggerFactory.getLogger(ActivityExtractor.class);
 	private Map<String, Set<String>> activities = new HashMap<>();
 	private static String word = "[a-zA-Z-]+";
@@ -47,8 +47,8 @@ public class ActivityExtractor implements TimeSheetEntryVisitor {
 
 
 	@Override
-	public void visit(TimeSheetEntry entry) {
-		String activityCln = StringUtils.trimToNull(entry.getActivity());
+	public void visit(Activity entry) {
+		String activityCln = StringUtils.trimToNull(entry.getName());
 		if (activityCln == null) {
 			return;
 		}

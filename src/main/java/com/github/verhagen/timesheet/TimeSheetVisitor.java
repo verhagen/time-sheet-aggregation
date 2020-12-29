@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface TimeSheetVisitor {
 
-	void visit(LocalDate key, List<TimeSheetEntry> value);
+	void visit(LocalDate key, List<Activity> value);
 
 }

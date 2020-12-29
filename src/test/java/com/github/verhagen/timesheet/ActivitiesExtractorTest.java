@@ -16,7 +16,7 @@ public class ActivitiesExtractorTest {
 
 	@Test
 	void extractActivities() {
-		TimeSheetLogbook timeSheet = TimeSheetHelper.createTimeSheetSimple();
+		TimeSheet timeSheet = TimeSheetHelper.createTimeSheetSimple();
 
 		ActivityExtractor activityExtractor = new ActivityExtractor();
 		timeSheet.accept(activityExtractor);
@@ -34,7 +34,7 @@ public class ActivitiesExtractorTest {
 
 	@Test
 	void extractActivitiesWithOutTravel() {
-		TimeSheetLogbook timeSheet = TimeSheetHelper.createTimeSheetSimple();
+		TimeSheet timeSheet = TimeSheetHelper.createTimeSheetSimple();
 
 		List<String> activitiesToIgnore = Arrays.asList(new String [] {
 			"*[travel]"
@@ -55,7 +55,7 @@ public class ActivitiesExtractorTest {
 
 	@Test
 	void extractActivitiesAll() {
-		TimeSheetLogbook timeSheet = TimeSheetHelper.createTimeSheetTwoWeeks();
+		TimeSheet timeSheet = TimeSheetHelper.createTimeSheetTwoWeeks();
 
 //		List<String> activitiesToIgnore = Arrays.asList(new String [] {
 //			"*[travel*]"

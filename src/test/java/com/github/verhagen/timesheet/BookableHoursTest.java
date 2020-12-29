@@ -11,7 +11,7 @@ public class BookableHoursTest {
 
 	@Test
 	void bookbleHours() throws Exception {
-		TimeSheetLogbook timeSheet = TimeSheetHelper.createTimeSheetSimple();
+		TimeSheet timeSheet = TimeSheetHelper.createTimeSheetSimple();
 		ActivityExtractor activityExtractor = new ActivityExtractor();
 		timeSheet.accept(activityExtractor);
 		List<String> activitiesToIgnore = Arrays.asList(new String [] {

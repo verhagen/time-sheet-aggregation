@@ -10,27 +10,27 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TimeSheetLogbook {
-	private static Logger logger = LoggerFactory.getLogger(TimeSheetLogbook.class);
-	private final List<TimeSheetEntry> entries;
-	private final Map<LocalDate, List<TimeSheetEntry>> activities;
+public class TimeSheet {
+	private static Logger logger = LoggerFactory.getLogger(TimeSheet.class);
+	private final List<Activity> entries;
+	private final Map<LocalDate, List<Activity>> activitiesPerDay;
 	private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
 
 
-	public TimeSheetLogbook(Builder bldr) {
+	public TimeSheet(Builder bldr) {
 		entries = bldr.getEntries();
-		activities = new HashMap<>();
-		for (TimeSheetEntry entry : entries) {
-			if (! activities.containsKey(entry.getDate())) {
-				activities.put(entry.getDate(), new ArrayList<>());
+		activitiesPerDay = new HashMap<>();
+		for (Activity entry : entries) {
+			if (! activitiesPerDay.containsKey(entry.getDate())) {
+				activitiesPerDay.put(entry.getDate(), new ArrayList<>());
 			}
-			activities.get(entry.getDate()).add(entry);
+			activitiesPerDay.get(entry.getDate()).add(entry);
 		}
 	}
 
 
 	public void accept(TimeSheetVisitor visitor, LocalDate startDate, LocalDate endDate) {
-		for (Map.Entry<LocalDate, List<TimeSheetEntry>> entry : activities.entrySet()) {
+		for (Map.Entry<LocalDate, List<Activity>> entry : activitiesPerDay.entrySet()) {
 			if (entry.getKey().isBefore(startDate) || entry.getKey().isAfter(endDate)) {
 				logger.info("Entry with date '" + entry.getKey().format(formatter) + "' not in scope ("
 						+ startDate.format(formatter ) + " - " + endDate.format(formatter) + ").");
@@ -40,20 +40,20 @@ public class TimeSheetLogbook {
 		}
 	}
 
-	public void accept(TimeSheetEntryVisitor visitor) {
-		for (TimeSheetEntry entry : entries) {
+	public void accept(Visitor<Activity> visitor) {
+		for (Activity entry : entries) {
 			entry.accept(visitor);
 		}
 	}
 
 
 	public static class Builder {
-		private List<TimeSheetEntry> entries = new ArrayList<>();
 		private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+		private List<Activity> activities = new ArrayList<>();
 
 
 		public Builder add(String dateStr, float hours, String activity) {
-			add(new TimeSheetEntry.Builder()
+			add(new Activity.Builder()
 				.add(LocalDate.parse(dateStr, formatter))
 				.add(hours)
 				.add(activity)
@@ -61,23 +61,19 @@ public class TimeSheetLogbook {
 			return this;
 		}
 
-		public List<TimeSheetEntry> getEntries() {
-			return entries;
+		public List<Activity> getEntries() {
+			return activities;
 		}
 
-		private Builder add(TimeSheetEntry entry) {
-			entries.add(entry);
+		private Builder add(Activity entry) {
+			activities.add(entry);
 			return this;
 		}
 
-		public TimeSheetLogbook create() {
-			return new TimeSheetLogbook(this);
+		public TimeSheet create() {
+			return new TimeSheet(this);
 		}
 
 	}
 
-
-	public class Activity {
-		
-	}
 }
