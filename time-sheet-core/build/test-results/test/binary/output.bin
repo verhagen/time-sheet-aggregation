@@ -1,0 +1,12 @@
+‚12:14:25.503 [Test worker] INFO com.github.verhagen.timesheet.Aggregator - ^sample.[a-zA-Z0-9-]+$  sample.programming  ->  sample
+‚12:14:25.505 [Test worker] INFO com.github.verhagen.timesheet.Aggregator - ^sample.[a-zA-Z0-9-]+$  sample.programming  ->  sample
+‚12:14:25.506 [Test worker] INFO com.github.verhagen.timesheet.Aggregator - ^sample.[a-zA-Z0-9-]+$  sample.programming  ->  sample
+ƒ12:14:25.506 [Test worker] INFO com.github.verhagen.timesheet.Aggregator - ^sample.travel.to$  sample.travel.to  ->  sample-travel
+v12:14:25.506 [Test worker] INFO com.github.verhagen.timesheet.Aggregator - ^self.[a-zA-Z0-9-]+$  self.study  ->  self
+12:14:25.506 [Test worker] INFO com.github.verhagen.timesheet.Aggregator - ^self.[a-zA-Z0-9-]+$  self.administration  ->  self
+‚12:14:25.506 [Test worker] INFO com.github.verhagen.timesheet.Aggregator - ^sample.[a-zA-Z0-9-]+$  sample.programming  ->  sample
+‚12:14:25.506 [Test worker] INFO com.github.verhagen.timesheet.Aggregator - ^sample.[a-zA-Z0-9-]+$  sample.programming  ->  sample
+~12:14:25.507 [Test worker] INFO com.github.verhagen.timesheet.Aggregator - ^sample.[a-zA-Z0-9-]+$  sample.testing  ->  sample
+}12:14:25.507 [Test worker] INFO com.github.verhagen.timesheet.Aggregator - ^sample.[a-zA-Z0-9-]+$  sample.travel  ->  sample
+	»12:14:25.515 [Test worker] WARN com.github.verhagen.timesheet.ActivityGraph - Found activity 'Issue regarding ...' which does not follow the pattern '^([a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*)$'
+	À12:14:25.516 [Test worker] WARN com.github.verhagen.timesheet.ActivityGraph - Found activity 'Train delay on departure' which does not follow the pattern '^([a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*)$'
