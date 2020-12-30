@@ -31,11 +31,11 @@ public class AggregatorPerWeekTest {
 	@Test
 	void aggregateHoursPerDayTwoWeeks() {
 		Map<String, String> groupBy = new LinkedHashMap<>();
-		groupBy.put("sample[travel-from]", "sample-travel");
-		groupBy.put("sample[travel-to]", "sample-travel");
-		groupBy.put("sample[travel]", "sample-travel");
-		groupBy.put("sample[*]", "sample");
-		groupBy.put("self[*]", "self");
+		groupBy.put("sample.travel.from", "sample-travel");
+		groupBy.put("sample.travel.to", "sample-travel");
+		groupBy.put("sample.travel", "sample-travel");
+		groupBy.put("sample.*", "sample");
+		groupBy.put("self.*", "self");
 				
 		Aggregator aggregator = new Aggregator(groupBy);
 		TimeSheet timeSheet = TimeSheetHelper.createTimeSheetTwoWeeks();

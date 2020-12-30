@@ -24,7 +24,7 @@ public class AggregatePerWeek implements AggregateVisitor {
 			weekBldrs.put(yearWeekIndex, new Week.Builder());
 		}
 		Week.Builder bldr = weekBldrs.get(yearWeekIndex);
-		bldr.add(date, entries);
+//		bldr.add(date, entries);
 	}
 
 	public void lock() {

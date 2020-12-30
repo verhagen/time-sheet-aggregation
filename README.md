@@ -15,4 +15,10 @@ year; week; day; date; hours; activity
 ```
 
 
+## Architecture
+
+TimeSheet
+- activities
+- getTImeSheetPerWeek
+- getTImeSheetPerMonth
 

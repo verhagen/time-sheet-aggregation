@@ -26,10 +26,11 @@
       Remove empty entries, where possible
 
 ## General improvements
-- [ ] Make Activity names a tree (format: `activity.activity` similar to log instancee tree). Instead two fixed layers of main and sub activity (format: `main-activity[sub-activity]`)
+- [/] Make Activity names a tree (format: `activity.activity` similar to log instance tree). Instead two fixed layers of main and sub activity (format: `main-activity[sub-activity]`)  
+    - [x] Create png of activity graph
 - [ ] Move group-by / filter to the ShowWeekPerYear, instead of 
 - [ ] Register time of activity in hours and minutes (not as float)
-
+- [x] Add optional a description to each activity (in Markdown)
 
 ## Test Cases
 - [ ] test total hours per week / month for (group-by) activities

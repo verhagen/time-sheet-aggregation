@@ -4,17 +4,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TimeSheet {
+public class TimeSheet implements ActivitiesPerDay {
 	private static Logger logger = LoggerFactory.getLogger(TimeSheet.class);
+	private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
 	private final List<Activity> entries;
 	private final Map<LocalDate, List<Activity>> activitiesPerDay;
-	private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+	private final Map<String, Week> weeks = new LinkedHashMap<>();
 
 
 	public TimeSheet(Builder bldr) {
@@ -25,7 +27,23 @@ public class TimeSheet {
 				activitiesPerDay.put(entry.getDate(), new ArrayList<>());
 			}
 			activitiesPerDay.get(entry.getDate()).add(entry);
+
+			String yearMonthIndex = Week.Builder.getYearWeek(entry.getDate());
+			if (! weeks.containsKey(yearMonthIndex)) {
+				weeks.put(yearMonthIndex, new Week(this, entry.getDate()));
+			}
 		}
+
+//		Map<String, Week.Builder> weekBldrs = new LinkedHashMap<>();
+//		for (LocalDate date :  activitiesPerDay.keySet()) {
+//			String yearWeekIndex = Week.Builder.getYearWeek(date);
+//			if (! weekBldrs.containsKey(yearWeekIndex)) {
+//				weekBldrs.put(yearWeekIndex, new Week.Builder());
+//			}
+//			Week.Builder weekBldr = weekBldrs.get(yearWeekIndex);
+//			weekBldr.add(date, activitiesPerDay.get(date));
+//		}
+
 	}
 
 
@@ -46,6 +64,12 @@ public class TimeSheet {
 		}
 	}
 
+	public List<Activity> getActivities(LocalDate date) {
+		return activitiesPerDay.get(date);
+	}
+
+
+
 
 	public static class Builder {
 		private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
@@ -58,6 +82,15 @@ public class TimeSheet {
 				.add(hours)
 				.add(activity)
 				.create());
+			return this;
+		}
+		public Builder add(String dateStr, float hours, String activity, String description) {
+			add(new Activity.Builder()
+					.add(LocalDate.parse(dateStr, formatter))
+					.add(hours)
+					.add(activity)
+					.add(description)
+					.create());
 			return this;
 		}
 
@@ -73,7 +106,6 @@ public class TimeSheet {
 		public TimeSheet create() {
 			return new TimeSheet(this);
 		}
-
 	}
 
 }

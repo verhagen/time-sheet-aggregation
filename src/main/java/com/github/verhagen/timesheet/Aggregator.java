@@ -22,7 +22,7 @@ public class Aggregator implements TimeSheetVisitor {
 	
 	public Aggregator(Map<String, String> groupByPatternAsStr) {
 		for (Map.Entry<String, String> entry : groupByPatternAsStr.entrySet()) {
-			String regExp = ActivityExtractor.toRegularExpression(entry.getKey());
+			String regExp = ActivityGraph.toRegularExpression(entry.getKey());
 			groupBy.put(Pattern.compile(regExp), entry.getValue());
 		}
 	}
@@ -45,8 +45,6 @@ public class Aggregator implements TimeSheetVisitor {
 			}
 			mainActivities.put(groupByActivity, groupByTotalHours);
 		}
-		
-		
 	}
 
 	private String groupBy(String activity) {

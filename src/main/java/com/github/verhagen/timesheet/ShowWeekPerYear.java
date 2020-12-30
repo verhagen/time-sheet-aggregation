@@ -31,11 +31,17 @@ public class ShowWeekPerYear implements Visitor<Week> {
 				bldr.append(week.getDate(day).plusDays(6).format(formatter));
 				bldr.append(COL_SEP);
 			}
-			logger.info(week.getYearWeek() + "  " + day.name() + "  " + week.getActivities(day));
+			logger.info(week.getYearWeek() + "  " + day.name() + "  " + week.getDate(day));
 
+			List<Activity> activities = week.getActivities(day);
+			ActivityGraph graph = new ActivityGraph();
+			for (Activity activity : activities) {
+				graph.visit(activity);
+			}
+			
 			// TODO sum the specific activities
-			Float hours = week.getActivities(day).get("sample");
-			bldr.append((hours == null ? "   " : hours)).append(COL_SEP);
+//			Float hours = week.getActivities(day).get("sample");
+//			bldr.append((hours == null ? "   " : hours)).append(COL_SEP);
 		}
 		weeksAsText.add(bldr.toString());
 	}
