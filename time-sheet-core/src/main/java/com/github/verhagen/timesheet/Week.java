@@ -78,63 +78,63 @@ public class Week implements ActivitiesPerDay {
 	}
 
 	
-	public static class Builder {
-		private Integer week;
-		private Integer year;
-		private Map<LocalDate, Map<String, Float>> weekEntries = new LinkedHashMap<>();
-		private String yearWeek;
-
-
-		public String getYearWeek() {
-			return yearWeek;
-		}
-
-
-		public Week create() {
-			return null;//new Week(this);
-		}
-
-
-		public Map<LocalDate, Map<String, Float>> getWeekEntries() {
-			return weekEntries;
-		}
-
-
-		public int getWeek() {
-			return week;
-		}
-
-		public Builder add(LocalDate date) {
-			if (week == null) {
-				week = date.get(weekFields.weekOfWeekBasedYear());
-				year = date.getYear();
-				yearWeek = getYearWeek(date);
-			}
-			return this;
-		}
-
-		public void add(LocalDate date, List<Activity> entries) {
-			if (week == null) {
-				week = date.get(weekFields.weekOfWeekBasedYear());
-				year = date.getYear();
-				yearWeek = getYearWeek(date);
-			}
-			else if (week != date.get(weekFields.weekOfWeekBasedYear())
-					|| year != date.getYear()) {
-				throw new IllegalArgumentException("Argument 'date' with value '" + date.format(formatter)
-					+ "' doesn't belong to this week '" + week + "' of year '" + year + "'");
-			}
-
-//			weekEntries.put(date, entries);
-		}
-
-		public static String getYearWeek(LocalDate date) {
-			int week = date.get(weekFields.weekOfWeekBasedYear());
-			int year = date.getYear();
-			return year + "." + (week < 10 ? "0" + week : week);
-		}
-
-	}
+//	public static class Builder {
+//		private Integer week;
+//		private Integer year;
+//		private Map<LocalDate, Map<String, Float>> weekEntries = new LinkedHashMap<>();
+//		private String yearWeek;
+//
+//
+//		public String getYearWeek() {
+//			return yearWeek;
+//		}
+//
+//
+//		public Week create() {
+//			return null;//new Week(this);
+//		}
+//
+//
+//		public Map<LocalDate, Map<String, Float>> getWeekEntries() {
+//			return weekEntries;
+//		}
+//
+//
+//		public int getWeek() {
+//			return week;
+//		}
+//
+//		public Builder add(LocalDate date) {
+//			if (week == null) {
+//				week = date.get(weekFields.weekOfWeekBasedYear());
+//				year = date.getYear();
+//				yearWeek = getYearWeek(date);
+//			}
+//			return this;
+//		}
+//
+//		public void add(LocalDate date, List<Activity> entries) {
+//			if (week == null) {
+//				week = date.get(weekFields.weekOfWeekBasedYear());
+//				year = date.getYear();
+//				yearWeek = getYearWeek(date);
+//			}
+//			else if (week != date.get(weekFields.weekOfWeekBasedYear())
+//					|| year != date.getYear()) {
+//				throw new IllegalArgumentException("Argument 'date' with value '" + date.format(formatter)
+//					+ "' doesn't belong to this week '" + week + "' of year '" + year + "'");
+//			}
+//
+////			weekEntries.put(date, entries);
+//		}
+//
+//		public static String getYearWeek(LocalDate date) {
+//			int week = date.get(weekFields.weekOfWeekBasedYear());
+//			int year = date.getYear();
+//			return year + "." + (week < 10 ? "0" + week : week);
+//		}
+//
+//	}
 
 
 

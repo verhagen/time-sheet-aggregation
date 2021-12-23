@@ -5,14 +5,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,10 +23,10 @@ import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.util.mxCellRenderer;
 
 public class ActivityGraph implements Visitor<Activity> {
-	private static final ActivityNode NODE_ROOT = new ActivityNode("__root__");
-	private static final ActivityNode NODE_NOTE = new ActivityNode("__note__");
+	private static final Node NODE_ROOT = new Node("__root__");
+	private static final Node NODE_NOTE = new Node("__note__");
 	private Logger logger = LoggerFactory.getLogger(ActivityGraph.class);
-	private DefaultDirectedGraph<ActivityNode, DefaultEdge> activityGraph = new DefaultDirectedGraph<>(DefaultEdge.class);
+	private DefaultDirectedGraph<Node, DefaultEdge> activityGraph = new DefaultDirectedGraph<>(DefaultEdge.class);
 //	private Map<String, Set<String>> activities = new HashMap<>();
 	private static String word = "[a-zA-Z0-9-]+";
 	private Pattern notePattern = Pattern.compile("^\\(.*\\)$");
@@ -67,35 +59,35 @@ public class ActivityGraph implements Visitor<Activity> {
 
 	@Override
 	public void visit(Activity activity) {
-		String activityNameCln = StringUtils.trimToNull(activity.getName());
-		if (activityNameCln == null) {
-			return;
-		}
-		Matcher matcher = notePattern.matcher(activityNameCln);
-		if (matcher.matches()) {
-			activityGraph.addEdge(NODE_ROOT, NODE_NOTE);
-			logger.info("Found note '" + activityNameCln + "'");
-			return;
-		}
-		matcher = activityPattern.matcher(activityNameCln);
-		if (! matcher.matches()) {
-			logger.warn("Found activity '" + activityNameCln + "' which does not follow the pattern '"
-					+ activityPattern.pattern() + "'");
-			return;
-		}
-
-		String[] names = activityNameCln.split("\\.");
-//		logger.info("names: " + Arrays.asList(names));
-		ActivityNode parentNode = NODE_ROOT;
-		for (String name : names) {
-			ActivityNode node = new ActivityNode(name);
-			if (! activityGraph.containsVertex(node)) {
-				activityGraph.addVertex(node);
-			}
-			activityGraph.addEdge(parentNode, node);
-			parentNode = node;
-		}
-		parentNode.add(activity);
+//		String activityNameCln = StringUtils.trimToNull(activity.getName());
+//		if (activityNameCln == null) {
+//			return;
+//		}
+//		Matcher matcher = notePattern.matcher(activityNameCln);
+//		if (matcher.matches()) {
+//			activityGraph.addEdge(NODE_ROOT, NODE_NOTE);
+//			logger.info("Found note '" + activityNameCln + "'");
+//			return;
+//		}
+//		matcher = activityPattern.matcher(activityNameCln);
+//		if (! matcher.matches()) {
+//			logger.warn("Found activity '" + activityNameCln + "' which does not follow the pattern '"
+//					+ activityPattern.pattern() + "'");
+//			return;
+//		}
+//
+//		String[] names = activityNameCln.split("\\.");
+////		logger.info("names: " + Arrays.asList(names));
+//		Node parentNode = NODE_ROOT;
+//		for (String name : names) {
+//			Node node = new Node(name);
+//			if (! activityGraph.containsVertex(node)) {
+//				activityGraph.addVertex(node);
+//			}
+//			activityGraph.addEdge(parentNode, node);
+//			parentNode = node;
+//		}
+//		parentNode.add(activity);
 	}
 
 
@@ -112,8 +104,8 @@ public class ActivityGraph implements Visitor<Activity> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		JGraphXAdapter<ActivityNode, DefaultEdge> graphAdapter = 
-				new JGraphXAdapter<ActivityNode, DefaultEdge>(activityGraph);
+		JGraphXAdapter<Node, DefaultEdge> graphAdapter =
+				new JGraphXAdapter<Node, DefaultEdge>(activityGraph);
 	    mxIGraphLayout layout = new mxHierarchicalLayout(graphAdapter);
 	    layout.execute(graphAdapter.getDefaultParent());
 	    
@@ -129,7 +121,7 @@ public class ActivityGraph implements Visitor<Activity> {
 	}
 	@Override
 	public String toString() {
-		DepthFirstIterator<ActivityNode, DefaultEdge> depthFirstIterator = new DepthFirstIterator<>(activityGraph);
+		DepthFirstIterator<Node, DefaultEdge> depthFirstIterator = new DepthFirstIterator<>(activityGraph);
 		while (depthFirstIterator.hasNext()) {
 			logger.info("toString()  " + depthFirstIterator.next());
 			

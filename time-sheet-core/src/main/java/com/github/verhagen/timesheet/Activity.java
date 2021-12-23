@@ -4,14 +4,14 @@ import java.time.LocalDate;
 
 public class Activity {
 	private final LocalDate date;
-	private final float hours;
+	private final int minutes;
 	private final String name;
 	private final String description;
 
 
 	public Activity(Builder bldr) {
 		this.date = bldr.getDate();
-		this.hours = bldr.getHours();
+		this.minutes = bldr.getMinutes();
 		this.name = bldr.getName();
 		this.description = bldr.getDescription();
 	}
@@ -21,8 +21,8 @@ public class Activity {
 		return date;
 	}
 
-	public float getHours() {
-		return hours;
+	public int getMinutes() {
+		return minutes;
 	}
 
 	public String getName() {
@@ -38,12 +38,23 @@ public class Activity {
 		visitor.visit(this);
 	}
 
+	public String[] getNamePath() {
+		return name.split("\\.");
+	}
 
-
+	@Override
+	public String toString() {
+		return "Activity{" +
+				"date: '" + date +
+				"', minutes: '" + minutes +
+				"', name: '" + name +
+				"', description='" + description +
+				"'}";
+	}
 
 	public static class Builder {
 		private LocalDate date;
-		private float hours;
+		private int minutes;
 		private String name;
 		private String description;
 
@@ -58,8 +69,8 @@ public class Activity {
 			return this;
 		}
 
-		public Builder add(float hours) {
-			this.hours = hours;
+		public Builder add(int minutes) {
+			this.minutes = minutes;
 			return this;
 		}
 
@@ -78,8 +89,8 @@ public class Activity {
 			return date;
 		}
 
-		public float getHours() {
-			return hours;
+		public int getMinutes() {
+			return minutes;
 		}
 
 		public String getName() {

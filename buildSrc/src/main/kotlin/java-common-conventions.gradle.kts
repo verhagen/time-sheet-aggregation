@@ -1,5 +1,6 @@
 plugins {
     java
+    eclipse
 }
 
 repositories {

@@ -3,7 +3,7 @@ tmp/
 
 # Gradle
 .gradle/
-bin/
+build/
 
 # Maven Configuration
 target/
@@ -16,6 +16,7 @@ release.properties
 .settings/
 .classpath
 .project
+bin/
 
 # IntelliJ Configuration
 .idea/

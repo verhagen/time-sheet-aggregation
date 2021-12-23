@@ -25,7 +25,7 @@ public class AggregatorPerWeekTest {
 		timeSheet.accept(aggregator, LocalDate.of(2020, 1, 1), LocalDate.of(2020, 1, 31));
 
 		AggregatePerWeek aggregatePerWeek = new AggregatePerWeek();
-		aggregator.accept(aggregatePerWeek);
+//		aggregator.accept(aggregatePerWeek);
 	}
 
 	@Test
@@ -41,12 +41,12 @@ public class AggregatorPerWeekTest {
 		TimeSheet timeSheet = TimeSheetHelper.createTimeSheetTwoWeeks();
 		timeSheet.accept(aggregator, LocalDate.of(2020, 1, 1), LocalDate.of(2020, 1, 31));
 
-		AggregatePerWeek aggregatePerWeek = new AggregatePerWeek();
-		aggregator.accept(aggregatePerWeek);
+//		AggregatePerWeek aggregatePerWeek = new AggregatePerWeek();
+//		aggregator.accept(aggregatePerWeek);
 		
-		ShowWeekPerYear showWeekPerYear = new ShowWeekPerYear();
-		aggregatePerWeek.accept(showWeekPerYear);
-		logger.info("\n" + showWeekPerYear.asText());
+//		ShowWeekPerYear showWeekPerYear = new ShowWeekPerYear();
+//		aggregatePerWeek.accept(showWeekPerYear);
+//		logger.info("\n" + showWeekPerYear.asText());
 	}
 
 }

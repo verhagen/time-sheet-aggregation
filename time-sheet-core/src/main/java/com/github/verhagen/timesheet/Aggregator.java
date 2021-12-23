@@ -39,11 +39,12 @@ public class Aggregator implements TimeSheetVisitor {
 		Map<String, Float> mainActivities = totalsPerMainActivityPerDay.get(date);
 		for (Activity entry : entries) {
 			String groupByActivity = groupBy(entry.getName());
-			float groupByTotalHours = entry.getHours();
-			if (mainActivities.containsKey(groupByActivity)) {
-				groupByTotalHours += mainActivities.get(groupByActivity);
-			}
-			mainActivities.put(groupByActivity, groupByTotalHours);
+			// TODO Fix get hours / minutes
+//			int groupByTotalHours = entry.getMinutes()
+//			if (mainActivities.containsKey(groupByActivity)) {
+//				groupByTotalHours += mainActivities.get(groupByActivity);
+//			}
+//			mainActivities.put(groupByActivity, groupByTotalHours);
 		}
 	}
 
