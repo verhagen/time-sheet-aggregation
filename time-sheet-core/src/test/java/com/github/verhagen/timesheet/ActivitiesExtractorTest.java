@@ -2,6 +2,7 @@ package com.github.verhagen.timesheet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 public class ActivitiesExtractorTest {
 	private Logger logger = LoggerFactory.getLogger(ActivitiesExtractorTest.class);
-
+	private Path generatedPath =  Paths.get("build/generated-time-sheet");
 
 	@Test
 	void extractActivities() {
@@ -23,7 +24,7 @@ public class ActivitiesExtractorTest {
 		timeSheet.accept(activityExtractor);
 		
 		logger.info("" + activityExtractor);
-		activityExtractor.asPng(Paths.get("target", "time-sheet-simple-activities.png"));
+		activityExtractor.asPng(generatedPath.resolve("time-sheet-simple-activities.png"));
 //		Set<String> mainActivities = activityExtractor.getMainActivities();
 //
 //		assertNotNull(mainActivities);
@@ -67,7 +68,7 @@ public class ActivitiesExtractorTest {
 //		});
 		ActivityGraph activityExtractor = new ActivityGraph();
 		timeSheet.accept(activityExtractor);
-		activityExtractor.asPng(Paths.get("target", "time-sheet-two-weeks-activities.png"));
+		activityExtractor.asPng(generatedPath.resolve("time-sheet-two-weeks-activities.png"));
 
 //		Set<String> mainActivities = activityExtractor.getMainActivities();
 //
